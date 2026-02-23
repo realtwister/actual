@@ -558,9 +558,9 @@ export const enableBankingservice = {
       console.debug(`--- End of transactions ---`);
     }
 
-    return transactions.map(transaction =>
-      bankProcessor.normalizeTransaction(transaction),
-    );
+    return transactions
+      .filter(transaction => !bankProcessor.skipTransaction(transaction))
+      .map(transaction => bankProcessor.normalizeTransaction(transaction));
   },
 
   getCurrentBalance: async (account_id: string) => {

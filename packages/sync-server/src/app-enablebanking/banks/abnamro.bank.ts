@@ -8,6 +8,11 @@ import { isKeyValueCache } from './utils.js';
 @BankProcessorFor(['NL_ABN AMRO'])
 export class ABNAmroBankProcessor extends FallbackBankProcessor {
   name = 'ABNAmroBankProcessor';
+
+  skipTransaction(t: components['schemas']['Transaction']): boolean {
+    return false;
+  }
+
   getNoteFromRemittance(remittance_information: string[]) {
     const keyValueCache = isKeyValueCache(remittance_information);
     if (keyValueCache) {

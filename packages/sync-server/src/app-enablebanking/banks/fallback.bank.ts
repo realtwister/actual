@@ -5,6 +5,11 @@ import type { Transaction } from '../models/enablebanking.js';
 export class FallbackBankProcessor implements BankProcessor {
   debug = false;
   name = 'FallbackBankProcessor';
+
+  skipTransaction(t: components['schemas']['Transaction']): boolean {
+    return false;
+  }
+
   normalizeTransaction(t: components['schemas']['Transaction']): Transaction {
     const isDebtor = t.credit_debit_indicator === 'DBIT';
 
